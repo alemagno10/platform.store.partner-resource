@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PartnerRepository extends CrudRepository<PartnerModel, String> {
-    Optional<PartnerModel> findByEmailAndHash(String email, String hash);
+    Optional<PartnerModel> findByEmailAndCnpj(String email, String cnpj);
 }

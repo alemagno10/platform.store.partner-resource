@@ -6,11 +6,19 @@ public class PartnerParser {
         return Partner.builder()
             .email(in.email())
             .name(in.name())
-            .password(in.password())
+            .cnpj(in.cnpj())
             .build();
     }
 
     public static PartnerOut to(Partner partner) {
+        return PartnerOut.builder()
+            .id(partner.id())
+            .email(partner.email())
+            .name(partner.name())
+            .build();
+    }
+
+    public static PartnerOut to(PartnerModel partner) {
         return PartnerOut.builder()
             .id(partner.id())
             .email(partner.email())

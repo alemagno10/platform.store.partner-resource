@@ -32,14 +32,14 @@ public class PartnerModel {
     @Column(name = "tx_email")
     private String email;
 
-    @Column(name = "tx_hash")
-    private String hash;
+    @Column(name = "tx_cnpj")
+    private String cnpj;
 
     public PartnerModel(Partner o) {
         this.id = o.id();
         this.name = o.name();
         this.email = o.email();
-        this.hash = o.hash();
+        this.cnpj = o.cnpj();
     }
     
     public Partner to() {
@@ -47,7 +47,7 @@ public class PartnerModel {
             .id(id)
             .name(name)
             .email(email)
-            .hash(hash)
+            .cnpj(cnpj)
             .build();
     }
 }

@@ -1,6 +1,9 @@
 package insper.store.partner;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,11 +49,8 @@ public class PartnerResource implements PartnerController {
 
     @Override
     public ResponseEntity<PartnerOut> create(PartnerIn in) {
-        // parser
         Partner partner = PartnerParser.to(in);
-        // insert using service
         partner = partnerService.create(partner);
-        // return
         return ResponseEntity.created(
             ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -62,16 +62,12 @@ public class PartnerResource implements PartnerController {
 
     @Override
     public ResponseEntity<PartnerOut> update(String id, PartnerIn in) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     @Override
-    public ResponseEntity<PartnerOut> read(String idUser) {
-        final PartnerOut partner = PartnerOut.builder()
-            .id(idUser)
-            .build();
-        return ResponseEntity.ok(partner);
+    public ResponseEntity<List<PartnerOut>> read() {
+        return ResponseEntity.ok(partnerService.findAll().stream().map(PartnerParser::to).collect(Collectors.toList()));
     }
     
 }
