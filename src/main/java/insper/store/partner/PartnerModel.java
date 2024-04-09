@@ -50,4 +50,11 @@ public class PartnerModel {
             .cnpj(cnpj)
             .build();
     }
+
+    public PartnerModel update(PartnerIn o) {
+        this.name = o.name();
+        this.email = o.email();
+        this.cnpj = o.cnpj();
+        return this;
+    }
 }

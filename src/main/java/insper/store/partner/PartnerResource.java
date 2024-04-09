@@ -1,6 +1,5 @@
 package insper.store.partner;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,12 +61,27 @@ public class PartnerResource implements PartnerController {
 
     @Override
     public ResponseEntity<PartnerOut> update(String id, PartnerIn in) {
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        try {
+            return ResponseEntity.ok(PartnerParser.to(partnerService.update(id, in)));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @Override
     public ResponseEntity<List<PartnerOut>> read() {
         return ResponseEntity.ok(partnerService.findAll().stream().map(PartnerParser::to).collect(Collectors.toList()));
+    }
+
+
+    @Override
+    public ResponseEntity<?> delete(String id){
+        try {
+            partnerService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.notFound().build();
+        }
     }
     
 }

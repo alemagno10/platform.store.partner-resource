@@ -27,4 +27,18 @@ public class PartnerService {
         partnerRepository.findAll().forEach(list::add);
         return list;
     }
+
+    public Partner update(@NonNull String id, PartnerIn in) {
+        PartnerModel partner = partnerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Partner not found"));
+        partner.update(in);
+        return partnerRepository.save(partner).to();
+    }
+
+    public void delete(@NonNull String id) {
+        if(partnerRepository.existsById(id)){
+            partnerRepository.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("Partner not found");
+        }
+    }
 }
