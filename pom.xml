@@ -67,6 +67,12 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
 		<!-- exporta no formato prometheus -->
 		<dependency>
 			<groupId>io.micrometer</groupId>
@@ -83,13 +89,6 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>2.9.2</version>
-		</dependency>
-		
 		</dependencies>
 	</dependencyManagement>
 	<build>
