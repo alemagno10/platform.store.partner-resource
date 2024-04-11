@@ -27,3 +27,9 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+
+springdoc:
+  api-docs:
+    path: /partner/v3/api-docs
+  swagger-ui:
+    path: /partner/swagger-ui.html
