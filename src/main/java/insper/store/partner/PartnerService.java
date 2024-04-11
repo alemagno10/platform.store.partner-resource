@@ -19,7 +19,7 @@ public class PartnerService {
     }
 
     public Partner read(@NonNull String id) {
-        return partnerRepository.findById(id).map(PartnerModel::to).orElse(null);
+        return partnerRepository.findById(id).map(PartnerModel::to).orElseThrow(() -> new IllegalArgumentException("Partner not found"));
     }
 
     public List<PartnerModel> findAll() {

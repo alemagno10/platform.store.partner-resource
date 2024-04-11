@@ -70,7 +70,11 @@ public class PartnerResource implements PartnerController {
 
     @Override
     public ResponseEntity<List<PartnerOut>> read() {
-        return ResponseEntity.ok(partnerService.findAll().stream().map(PartnerParser::to).collect(Collectors.toList()));
+        try{
+            return ResponseEntity.ok(partnerService.findAll().stream().map(PartnerParser::to).collect(Collectors.toList()));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 
 
