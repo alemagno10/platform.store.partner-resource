@@ -87,5 +87,13 @@ public class PartnerResource implements PartnerController {
             return ResponseEntity.notFound().build();
         }
     }
-    
+
+    @Override
+    public ResponseEntity<PartnerOut> findUser(String id){
+        try {
+            return ResponseEntity.ok(PartnerParser.to(partnerService.read(id)));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
