@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: account
+  name: partner
   labels:
-    name: account
+    name: partner
 spec:
   type: NodePort
   ports:
@@ -11,4 +11,4 @@ spec:
       targetPort: 8080
       protocol: TCP
   selector:
-    app: account
+    app: partner
