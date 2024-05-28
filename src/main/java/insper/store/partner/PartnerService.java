@@ -17,31 +17,33 @@ public class PartnerService {
     @Autowired
     private PartnerRepository partnerRepository;
 
-    @CachePut(value = "partner", key = "#results.id")
+    // @CachePut(value = "partner", key = "#result.id")
     public Partner create(Partner in) {
-        return partnerRepository.save(new PartnerModel(in)).to();
+        Partner partner = partnerRepository.save(new PartnerModel(in)).to();
+        return partner;
+        // return partnerRepository.save(new PartnerModel(in)).to();
     }
 
-    @Cacheable(value = "partner", key = "#id")
+    // @Cacheable(value = "partner", key = "#id")
     public Partner read(@NonNull String id) {
-        return partnerRepository.findById(id).map(PartnerModel::to).orElseThrow(() -> new IllegalArgumentException("Partner not found"));
+        return partnerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Partner not found")).to();
     }
 
-    @Cacheable(value = "allpartners")
+    // @Cacheable(value = "allpartners")
     public List<PartnerModel> findAll() {
         List<PartnerModel> list = new ArrayList<>();
         partnerRepository.findAll().forEach(list::add);
         return list;
     }
 
-    @CachePut(value = "partner", key = "#id")
+    // @CachePut(value = "partner", key = "#id")
     public Partner update(@NonNull String id, PartnerIn in) {
         PartnerModel partner = partnerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Partner not found"));
         partner.update(in);
         return partnerRepository.save(partner).to();
     }
 
-    @CacheEvict(value = "partner", key = "#id")
+    // @CacheEvict(value = "partner", key = "#id")
     public void delete(@NonNull String id) {
         if(partnerRepository.existsById(id)){
             partnerRepository.deleteById(id);

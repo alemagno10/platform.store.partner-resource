@@ -77,6 +77,15 @@ public class PartnerResource implements PartnerController {
         }
     }
 
+    // @Override
+    // public ResponseEntity<PartnerOut> readPartner(String id) {
+    //     try {
+    //         return ResponseEntity.ok(PartnerParser.to(partnerService.read(id)));
+    //     } catch (IllegalArgumentException e){
+    //         return ResponseEntity.notFound().build();
+    //     }
+    // }
+
 
     @Override
     public ResponseEntity<?> delete(String id){
@@ -91,8 +100,13 @@ public class PartnerResource implements PartnerController {
     @Override
     public ResponseEntity<PartnerOut> findUser(String id){
         try {
-            return ResponseEntity.ok(PartnerParser.to(partnerService.read(id)));
-        } catch (IllegalArgumentException e){
+            Partner partner = partnerService.read(id);
+            if (partner != null) {
+                return ResponseEntity.ok(PartnerParser.to(partner));
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
         }
     }
